@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnuhnbu31qshb"]
+
+[ext_resource type="PackedScene" uid="uid://bhh3uukhk8h4q" path="res://scenes/player.tscn" id="1_ffbe4"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_tn3vq"]
+[ext_resource type="Texture2D" uid="uid://c0mymsmjp3a36" path="res://assets/Nebula Aqua-Pink.png" id="3_5nudu"]
+[ext_resource type="PackedScene" uid="uid://dl7wfuhvviocp" path="res://scenes/enemySpawner.tscn" id="4_7qda3"]
+
+[node name="World" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_tn3vq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_top = -2.0
+offset_right = 1160.0
+offset_bottom = 648.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_5nudu")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("1_ffbe4")]
+process_mode = 1
+position = Vector2(518, 291)
+
+[node name="Canvas" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -577.5
+offset_top = -324.0
+offset_right = 577.5
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="Canvas"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -577.5
+offset_top = -326.0
+offset_right = 577.5
+offset_bottom = 326.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Canvas/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Canvas/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="Canvas/BoxContainer/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "YOU DEAD"
+uppercase = true
+
+[node name="enemySpawner" parent="." instance=ExtResource("4_7qda3")]

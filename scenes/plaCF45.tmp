@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhh3uukhk8h4q"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_08hio"]
+[ext_resource type="Texture2D" uid="uid://cg3g0rajta0em" path="res://assets/sprites/Ship.png" id="2_w3qsl"]
+[ext_resource type="AudioStream" uid="uid://boa6iimyv17ke" path="res://assets/sounds/laser_beam.mp3" id="3_hdl7h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2v6tt"]
+radius = 13.1529
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ylcap"]
+radius = 13.0
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+script = ExtResource("1_08hio")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2v6tt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, 1)
+rotation = 1.5708
+scale = Vector2(1.205, 1.205)
+texture = ExtResource("2_w3qsl")
+
+[node name="Position2D" type="Marker2D" parent="."]
+position = Vector2(26, 3.37)
+
+[node name="Hurt" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurt" groups=["Player"]]
+shape = SubResource("CircleShape2D_ylcap")
+
+[node name="shooting_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_hdl7h")
+bus = &"SFX"
+
+[connection signal="body_entered" from="Hurt" to="." method="_on_hurt_body_entered"]

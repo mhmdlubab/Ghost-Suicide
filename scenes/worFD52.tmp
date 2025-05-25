@@ -1,0 +1,107 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnuhnbu31qshb"]
+
+[ext_resource type="PackedScene" uid="uid://bhh3uukhk8h4q" path="res://scenes/player.tscn" id="1_ffbe4"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_tn3vq"]
+[ext_resource type="Texture2D" uid="uid://c0mymsmjp3a36" path="res://assets/Nebula Aqua-Pink.png" id="3_5nudu"]
+[ext_resource type="PackedScene" uid="uid://dl7wfuhvviocp" path="res://scenes/enemySpawner.tscn" id="4_7qda3"]
+
+[node name="World" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_tn3vq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_top = -2.0
+offset_right = 1160.0
+offset_bottom = 648.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_5nudu")
+expand_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("1_ffbe4")]
+process_mode = 1
+position = Vector2(518, 291)
+
+[node name="enemySpawner" parent="." instance=ExtResource("4_7qda3")]
+spawn_cooldown = null
+
+[node name="DeathScreen" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 1156.0
+offset_bottom = 647.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="DeathScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -580.5
+offset_top = -323.0
+offset_right = 574.5
+offset_bottom = 329.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DeathScreen/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathScreen/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="DeathScreen/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "YOU DEAD"
+uppercase = true
+
+[node name="Health" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Health"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="HP" type="Label" parent="Health/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "HP: 100"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 996.0
+offset_top = 53.0
+offset_right = 996.0
+offset_bottom = 93.0
+
+[node name="enemy_counter" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -134.0
+offset_top = -51.0
+offset_right = 160.0
+offset_bottom = 55.0

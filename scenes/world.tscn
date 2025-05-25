@@ -1,0 +1,128 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnuhnbu31qshb"]
+
+[ext_resource type="PackedScene" uid="uid://bhh3uukhk8h4q" path="res://scenes/player.tscn" id="1_ffbe4"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_tn3vq"]
+[ext_resource type="Texture2D" uid="uid://c0mymsmjp3a36" path="res://assets/sprites/Nebula Aqua-Pink.png" id="3_5nudu"]
+[ext_resource type="PackedScene" uid="uid://dl7wfuhvviocp" path="res://scenes/enemySpawner.tscn" id="4_7qda3"]
+[ext_resource type="PackedScene" uid="uid://8do01xau2x10" path="res://scenes/pause_menu.tscn" id="5_rooww"]
+
+[node name="World" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_tn3vq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_top = -2.0
+offset_right = 1160.0
+offset_bottom = 648.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_5nudu")
+expand_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("1_ffbe4")]
+process_mode = 1
+position = Vector2(580, 327)
+
+[node name="enemySpawner" parent="." instance=ExtResource("4_7qda3")]
+process_mode = 1
+
+[node name="DeathScreen" type="Control" parent="."]
+visible = false
+z_index = 1
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 1156.0
+offset_bottom = 647.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="DeathScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -580.5
+offset_top = -323.0
+offset_right = 574.5
+offset_bottom = 329.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DeathScreen/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathScreen/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="DeathScreen/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "YOU DEAD
+"
+uppercase = true
+
+[node name="Label2" type="Label" parent="DeathScreen/BoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "press y to restart
+"
+uppercase = true
+
+[node name="Health" type="Control" parent="."]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Health"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="HP" type="Label" parent="Health/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "HP: 100"
+
+[node name="Control" type="Control" parent="."]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1030.0
+offset_top = 50.0
+offset_right = 1030.0
+offset_bottom = 90.0
+
+[node name="enemy_counter" type="Label" parent="Control"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 1
+anchors_preset = -1
+offset_left = -151.0
+offset_top = -47.0
+offset_right = 101.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 30
+text = "Enemies Killed: 0"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="pauseMenu" parent="CanvasLayer" instance=ExtResource("5_rooww")]

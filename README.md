@@ -16,6 +16,12 @@ A fast-paced 2D arcade-style shooter developed in Godot. You control a flying ta
 - **Godot Engine**
 - **GDScript**
 
+## Web Build
+
+Playable web versions of the game are available in the `buildFolder` and `buildfolder 2.0`(newer version) directories.  
+You can open the HTML files inside those folders to play locally or visit the hosted version online if available.
+
+
 ## 👨‍💻 Developer
 
 Mainly developed by **Muhammed Salman**, with support from friends on design and testing.
